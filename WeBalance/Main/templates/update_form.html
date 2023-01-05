@@ -58,7 +58,44 @@
     </style>
   </head>
   <body>
+     <!-- NAVBAR -->
 
+     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <a class="navbar-brand" href="#">@We Balance</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#">About</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#">Contact</a>
+              </li>   
+              <li>
+                  <a class="nav-link active" href="{% url 'login' %}">Login</a>
+              </li>
+          </ul>
+      </div>  
+  </nav>
+  <!-- END OF NAVBAR -->
+  <!-- SIDEBAR -->
+  <button class="btn btn-primary" onclick="openNav()">Open</button>
+  <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="#">Home</a>
+      <a href="#">Dashboard</a>
+      <a href="#">Summary</a>
+      <a href="#">Report</a>
+      <a href="#">Preferences</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms and Conditions</a>
+  </div>
+  <!--END OF SIDEBAR-->
     <div class="Popup">
       <div class="fPopup" id="popupForm" class="formContainer">
         <form method="post">{% csrf_token %}
