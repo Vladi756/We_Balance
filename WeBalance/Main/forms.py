@@ -1,7 +1,8 @@
 from django import forms
+from django.forms import ModelForm
+from .models import Preferences
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
 
 # Create your forms here.
 
@@ -18,3 +19,8 @@ class NewUserForm(UserCreationForm):
 		if commit:
 			user.save()
 		return user
+
+class PreferencesForm(forms.ModelForm):
+    class Meta:
+        model = Preferences
+        fields = ('emails', 'calls', 'hours', 'meetings', 'breaks')

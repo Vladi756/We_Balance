@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Edit Action Taken</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      .Popup {
+        position: relative;
+        text-align: center;
+        display: inline-block;
+        width: 100%;
+      }
+      .fPopup {
+        display: inline-block;
+        position: fixed;
+        left: 45%;
+        top: 5%;
+        transform: translate(-50%, 5%);
+        border: 3px solid #999999;
+        z-index: 9;
+      }
+      .formContainer {
+        max-width: 300px;
+        padding: 20px;
+        background-color: #fff;
+      }
+      .formContainer input[type=checkbox] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 20px 0;
+        border: none;
+        background: #eee;
+      }
+      .formContainer input[type=checkbox]:focus{
+        background-color: #ddd;
+        outline: none;
+      }
+      .formContainer input[type=submit] {
+        padding: 12px 20px;
+        border: none;
+        background-color: #8ebf42;
+        color: #fff;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 15px;
+        opacity: 0.8;
+      }
+      .formContainer .cancel {
+        background-color: #cc0000;
+      }
+      .formContainer input[type=submit]:hover,
+      .openButton:hover {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="Popup">
+      <div class="fPopup" id="popupForm" class="formContainer">
+        <form method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Update">
+        </form>
+      </div>
+    </div>
+    <script>
+        openForm()
+      function openForm() {
+        document.getElementById("popupForm").style.display = "block";
+      }
+      function closeForm() {
+        document.getElementById("popupForm").style.display = "none";
+      }
+    </script>
+  </body>
+</html>
+
+
+

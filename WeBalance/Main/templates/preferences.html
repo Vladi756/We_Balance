@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html> 
 <html>
 
@@ -132,3 +133,150 @@
         </div>
     </body>
 </html>
+=======
+{% load static %}
+{% block content %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>     
+    const user = '{{user.id}}'; 
+</script>
+<script type="text/javascript" src="{% static 'preferences-form.js' %}">
+</script>
+
+<!DOCTYPE html> 
+<html>
+    <head>
+        <title>WeBalance</title>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'stylesheet.css' %}">
+
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="{% static 'stylesheet.css' %}">></script>
+        <script src="{% static 'script.js' %}"></script>
+    </head>
+    <body>
+        <!-- NAVBAR -->
+
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <a class="navbar-brand" href="{% url 'dashboard' %}">@We Balance</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'dashboard' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>   
+        {% if request.user.is_authenticated %}
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+        {% else %}
+        <li>
+            <a class="nav-link active" href="{% url 'login' %}">Login</a>
+        </li>
+        {% endif %}
+            </ul>
+        </div>  
+        </nav>
+
+        <!-- END OF NAVBAR -->
+
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="{% url 'dashboard' %}">Home</a>
+            <a href="{% url 'dashboard' %}">Dashboard</a>
+            <a href="{% url 'workdone' %}">Work Log</a>
+            <a href="{% url 'report' %}">Report</a>
+            <a href="{% url 'preferences' %}">Preferences</a>
+            <a href="{% url 'terms_and_conditions' %}">Privacy Policy</a>
+        </div>
+
+        <!-- Use any element to open the sidenav -->
+        <button type="button" class="btn btn-primary"><span onclick="openNav()">Open</span></button>
+
+        <!--END OF SIDEBAR-->
+
+        <div id="main">
+            <div class="jumbotron">
+                <h1 class="display-4">Preferences</h1>
+                <hr class="my-4">
+                <p class="lead">Please input your working preferences for the upcoming week.</p>
+            </div>
+
+            <!-- OPTIONS  -->
+            <div class = "row">
+                <div class = "jumbotron col-sm-2" style="margin:10px">
+                    <p> How many hours would you like to work this week?</p>
+                    <form method="POST" id='myForm'> {% csrf_token %}
+                        <select name="hours_worked" id="hour">
+                        <option value="">Select</option>
+                        <option value="20">Less than 20</option>
+                        <option value="30">20 to 40</option>
+                        <option value="40">More than 40</option>
+                        <option value="48">48+ (requires opt out)</option>
+                        </select>
+                        <input type="submit" value="Submit" />
+                </div>
+
+                <div class = "jumbotron col-sm-2" style="margin:10px">
+                    <p> How many calls would you like to take this week?</p>
+                        <select name="calls_taken" id="call">
+                        <option value="">Select</option>
+                        <option value="5">Less than 5</option>
+                        <option value="10">5 to 15</option>
+                        <option value="15">More than 15</option>
+                        </select>
+                        <input type="submit" value="Submit" />
+                </div>
+
+                <div class = "jumbotron col-sm-2" style="margin:10px">
+                    <p> How many emails would you like to answer?</p>
+                        <select name="emails_answered" id="email">
+                        <option value="">Select</option>
+                        <option value="10">Less than 10</option>
+                        <option value="15">10 to 20</option>
+                        <option value="20">More than 20</option>
+                        </select>
+                        <input type="submit" value="Submit" />
+                </div>
+                <div class = "jumbotron col-sm-2" style="margin:10px">
+                    <p> How many meetings would you like to attend this week?</p>
+                        <select name="meetings_attended" id="meeting">
+                        <option value="">Select</option>
+                        <option value="1">Less than 2</option>
+                        <option value="3">2 to 5</option>
+                        <option value="5">More than 5</option>
+                        </select>
+                        <input type="submit" value="Submit" />
+                </div>
+                <div class = "jumbotron col-sm-2" style="margin:10px">
+                    <p> How many breaks would you like to take this week?</p>
+                        <select name="breaks_taken" id="break">
+                        <option value="">Select</option>
+                        <option value="1">Less than one a day</option>
+                        <option value="2">1 to 3 a day</option>
+                        <option value="4">3 to 5 a day</option>
+                        <option value="5">More than 5 a day</option>
+                        </select>
+                        <input type="submit" value="Submit" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+{% endblock content %}
+>>>>>>> 8af0a42b892201f37119f5319f4aa45ef9b6d381

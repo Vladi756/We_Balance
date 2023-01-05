@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html> 
 <html>
 
@@ -134,3 +135,103 @@
         </div>
 
 </html>
+=======
+{% load static %}
+<!DOCTYPE html> 
+<html>
+
+    <head>
+        <title>WeBalance</title>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'stylesheet.css' %}">
+
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap4.min.css">
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="{% static 'stylesheet.css' %}">></script>
+        <script src="{% static 'script.js' %}"></script>
+        <script src="{% static 'report.js' %}"></script>
+    </head>
+    <body>
+        <!-- NAVBAR -->
+
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <a class="navbar-brand" href="{% url 'dashboard' %}">@We Balance</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'dashboard' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>   
+        {% if request.user.is_authenticated %}
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+        {% else %}
+        <li>
+            <a class="nav-link active" href="{% url 'login' %}">Login</a>
+        </li>
+        {% endif %}
+            </ul>
+        </div>  
+        </nav>
+
+        <!-- END OF NAVBAR -->
+
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="{% url 'dashboard' %}">Home</a>
+            <a href="{% url 'dashboard' %}">Dashboard</a>
+            <a href="{% url 'workdone' %}">Work Log</a>
+            <a href="{% url 'report' %}">Report</a>
+            <a href="{% url 'preferences' %}">Preferences</a>
+            <a href="{% url 'terms_and_conditions' %}">Privacy Policy</a>
+        </div>
+
+        <!-- Use any element to open the sidenav -->
+        <button type="button" class="btn btn-primary"><span onclick="openNav()">Open</span></button>
+
+        <div id="main">
+            <div class="jumbotron">
+                <h1 class="display-4">Report</h1>
+                <hr class="my-4">
+                <p class="lead">All your employees information, consolidated in one place.</p>
+            </div>
+            <div class = "jumbotron">
+                <table class="table" id="table"> 
+                    <thead>
+                      <tr>
+                        <th scope="col">Employee ID</th>
+                        <th scope="col">Date Flagged</th>
+                        <th scope="col">Flagged Issue</th>
+                        <th scope="col">Weekly Preference Amount</th>
+                        <th scope="col">Amount Done</th>
+                        <th scope="col">FLAG-ID</th>
+                        <th scope="col">Action Taken</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+
+</html>
+>>>>>>> 8af0a42b892201f37119f5319f4aa45ef9b6d381
