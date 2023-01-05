@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html> 
 <html>
 
@@ -8,51 +9,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="C:\Users\vkost\Documents\test\stylesheet.css">
+        <link rel="stylesheet" href="{% static 'stylesheet.css' %}">
 
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="C:\Users\vkost\Documents\git\We_Balance\WeBalance\Main\static\stylesheet.css"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap4.min.css">
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="{% static 'stylesheet.css' %}">></script>
+        <script src="{% static 'script.js' %}"></script>
+        <script src="{% static 'report.js' %}"></script>
     </head>
     <body>
         <!-- NAVBAR -->
 
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-            <a class="navbar-brand" href="#">@We Balance</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>   
-                    <li>
-                        <a class="nav-link active" href="{% url 'login' %}">Login</a>
-                    </li>
-                </ul>
-            </div>  
+        <a class="navbar-brand" href="{% url 'dashboard' %}">@We Balance</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'dashboard' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>   
+        {% if request.user.is_authenticated %}
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+        {% else %}
+        <li>
+            <a class="nav-link active" href="{% url 'login' %}">Login</a>
+        </li>
+        {% endif %}
+            </ul>
+        </div>  
         </nav>
+
         <!-- END OF NAVBAR -->
-        <!-- SIDEBAR -->
-        <button class="btn btn-primary" onclick="openNav()">Open</button>
+
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="#">Home</a>
-            <a href="#">Dashboard</a>
-            <a href="#">Summary</a>
-            <a href="#">Report</a>
-            <a href="#">Preferences</a>
-            <a href="#">Privacy Policy</a>
+            <a href="{% url 'dashboard' %}">Home</a>
+            <a href="{% url 'dashboard' %}">Dashboard</a>
+            <a href="{% url 'workdone' %}">Work Log</a>
+            <a href="{% url 'report' %}">Report</a>
+            <a href="{% url 'preferences' %}">Preferences</a>
+            <a href="{% url 'terms_and_conditions' %}">Privacy Policy</a>
         </div>
-        <!--END OF SIDEBAR-->
+
+        <!-- Use any element to open the sidenav -->
+        <button type="button" class="btn btn-primary"><span onclick="openNav()">Open</span></button>
 
         <div id="main">
             <div class="jumbotron">
@@ -61,73 +75,21 @@
                 <p class="lead">All your employees information, consolidated in one place.</p>
             </div>
             <div class = "jumbotron">
-                <table class="table">
+                <table class="table" id="table"> 
                     <thead>
                       <tr>
                         <th scope="col">Employee ID</th>
-                        <th scope="col">Department</th>
-                        <th scope="col">Flagged</th>
-                        <th scope="col">Preference Amount/week</th>
+                        <th scope="col">Date Flagged</th>
+                        <th scope="col">Flagged Issue</th>
+                        <th scope="col">Weekly Preference Amount</th>
                         <th scope="col">Amount Done</th>
                         <th scope="col">FLAG-ID</th>
                         <th scope="col">Action Taken</th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">E10334</th>
-                        <td>Marketing</td>
-                        <td>Email Count</td>
-                        <td>20</td>
-                        <td>40</td>
-                        <td>39842-231</td>
-                        <td><input type="checkbox"></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">E10232</th>
-                        <td>Marketing</td>
-                        <td>Hours Worked</td>
-                        <td>30</td>
-                        <td>39</td>
-                        <td>39842-231</td>
-                        <td><input type="checkbox"></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">E00331</th>
-                        <td>Human Resources</td>
-                        <td>Meetings Attended</td>
-                        <td>1</td>
-                        <td>4</td>
-                        <td>39842-231</td>
-                        <td><input type="checkbox"></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">E20000</th>
-                        <td>Finance</td>
-                        <td>Meetings Attended</td>
-                        <td>2</td>
-                        <td>8</td>
-                        <td>39842-231</td>
-                        <td><input type="checkbox"></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">E12564</th>
-                        <td>R&D</td>
-                        <td>Breaks</td>
-                        <td>5</td>
-                        <td>2</td>
-                        <td>39842-231</td>
-                        <td><input type="checkbox"></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">E10794</th>
-                        <td>Finance</td>
-                        <td>Email Count</td>
-                        <td>30</td>
-                        <td>70</td>
-                        <td>39842-231</td>
-                        <td><input type="checkbox"></td>
-                      </tr>
+                    
                     </tbody>
                   </table>
             </div>
