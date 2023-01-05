@@ -96,14 +96,18 @@
       <a href="#">Terms and Conditions</a>
   </div>
   <!--END OF SIDEBAR-->
-    <div class="Popup">
-      <div class="fPopup" id="popupForm" class="formContainer">
-        <form method="post">{% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Update">
-        </form>
+  <div class="row">
+    <div class = "jumbotron col-sm-2" style="margin:10px">
+      <div class="Popup">
+        <div class="fPopup" id="popupForm" class="formContainer">
+          <form method="post">{% csrf_token %}
+              {{ form.as_p }}
+              <input type="submit" value="Update">
+          </form>
+        </div>
       </div>
     </div>
+  </div
     <script>
         openForm()
       function openForm() {
